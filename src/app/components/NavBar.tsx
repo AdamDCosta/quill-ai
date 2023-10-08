@@ -10,7 +10,7 @@ function NavBar() {
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="z-40 flex font-semibold">
-            <span>quill.</span>
+            <span>quill.ai</span>
           </Link>
 
           {/* TODO: add mobile navbar */}
@@ -38,7 +38,7 @@ function NavBar() {
                   size: "sm",
                 })}
               >
-                Get started <ArrowRight className='ml-1.5 h-5 w-5' />
+                Get started <ArrowRight className="ml-1.5 h-5 w-5" />
               </RegisterLink>
             </>
           </div>
