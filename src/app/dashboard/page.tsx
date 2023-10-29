@@ -1,3 +1,4 @@
+import Dashboard from "@/components/Dashboard";
 import { db } from "@/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
@@ -18,7 +19,7 @@ async function Page() {
 
   if (!dbUser) redirect(AUTH_CALLBACK_URL);
 
-  return <div>{user.email}</div>;
+  return <Dashboard />;
 }
 
 export default Page;
