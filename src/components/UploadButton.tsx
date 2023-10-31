@@ -11,10 +11,29 @@ function UploadDropzone() {
   const [isUploading, setIsUploading] = useState(true);
   const [uploadProgress, setUploadProgress] = useState(0);
 
+  function startSimulatedProgress() {
+    setUploadProgress(0);
+
+    const interval = setInterval(() => {
+      setUploadProgress((prevProgress) => {
+        if (prevProgress >= 95) {
+          clearInterval(interval);
+          return prevProgress;
+        }
+        return (prevProgress += 5);
+      });
+    }, 500);
+  }
+
   return (
     <Dropzone
       multiple={false}
-      onDrop={(acceptedFile) => console.log(acceptedFile)}
+      onDrop={(acceptedFile) => {
+        setIsUploading(true);
+        const progressInterval = startSimulatedProgress();
+
+        // handle file uploading
+      }}
     >
       {({ getRootProps, getInputProps, acceptedFiles }) => (
         <div
