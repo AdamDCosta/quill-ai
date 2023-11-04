@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import Dropzone from "react-dropzone";
-import { Cloud, File } from "lucide-react";
+import { Cloud, File, Loader2 } from "lucide-react";
 import { Progress } from "./ui/progress";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useToast } from "./ui/use-toast";
@@ -41,6 +41,8 @@ function UploadDropzone() {
     }, 500);
     return interval;
   }
+
+  const progressBarColour = uploadProgress === 100 ? "bg-green-500" : "";
 
   return (
     <Dropzone
@@ -111,8 +113,15 @@ function UploadDropzone() {
                 <div className="mx-auto mt-4 w-full max-w-xs">
                   <Progress
                     value={uploadProgress}
+                    indicatorColour={progressBarColour}
                     className="h-1 w-full bg-zinc-200"
                   />
+                  {uploadProgress === 100 ? (
+                    <div className="flex items-center justify-center gap-1 pt-2 text-center text-sm text-zinc-700">
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                      Redirecting...
+                    </div>
+                  ) : null}
                 </div>
               ) : null}
               <input
