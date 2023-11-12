@@ -27,6 +27,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
 import SimpleBar from "simplebar-react";
+import PdfFullscreen from "./PdfFullScreen";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -76,12 +77,13 @@ export default function PdfRenderer({ url }: PdfRendererProps) {
           <Button
             onClick={() => {
               setCurrentPage((prev) => (prev - 1 > 1 ? prev - 1 : 1));
+              setValue("page", String(currentPage - 1));
             }}
             disabled={currentPage <= 1}
             aria-label="previous page"
             variant="ghost"
           >
-            <ChevronDown className="h-4 w-4" />
+            <ChevronUp className="h-4 w-4" />
           </Button>
 
           <div className="flex items-center gap-1.5">
@@ -109,12 +111,13 @@ export default function PdfRenderer({ url }: PdfRendererProps) {
               setCurrentPage((prev) =>
                 prev + 1 > numPages! ? numPages! : prev + 1,
               );
+              setValue("page", String(currentPage + 1));
             }}
             disabled={numPages === undefined || currentPage === numPages}
             aria-label="next-page"
             variant="ghost"
           >
-            <ChevronUp className="h-4 w-4" />
+            <ChevronDown className="h-4 w-4" />
           </Button>
         </div>
         <div className="space-x-2">
@@ -148,6 +151,8 @@ export default function PdfRenderer({ url }: PdfRendererProps) {
           >
             <RotateCw className="h-4 w-4" />
           </Button>
+
+          <PdfFullscreen fileUrl={url} />
         </div>
       </div>
 
